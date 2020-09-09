@@ -247,8 +247,29 @@ href=../../vehicle-related-services/hypothecation-cancellation/index.html class=
 id=menu-item-1550 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1550"><a
 href=../../vehicle-related-services/issue-noc-of-vehicle/index.html class=menu-link>Issue NOC of Vehicle</a></li><li
 id=menu-item-1551 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1551"><a
-href=../../vehicle-related-services/submit-noc-of-vehicle/index.html class=menu-link>Submit NOC of Vehicle</a></li><li
-id=menu-item-1552 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1552"><a
+href=../../vehicle-related-services/submit-noc-of-vehicle/index.html class=menu-link>Submit NOC of Vehicle</a></li>
+
+
+<li id=menu-item-1551 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1551"><a
+href=../../vehicle-related-services/permit-renewal/index.html class=menu-link>Permit Renewal</a></li>
+
+<li id=menu-item-1551 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1551"><a
+href=../../vehicle-related-services/letter-of-authorisation/index.html class=menu-link>Letter of Authorisation</a></li>
+
+<li id=menu-item-1551 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1551"><a
+href=../../vehicle-related-services/reflector-tapes-and-c3/index.html class=menu-link>Reflector Tapes And C3 </a></li>
+
+<li id=menu-item-1551 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1551"><a
+href=../../vehicle-related-services/cng-kit-installtion/index.html class=menu-link>CNG Kit Installtion</a></li>
+
+<li id=menu-item-1551 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1551"><a
+href=../../vehicle-related-services/ais-140-vehicle-tracking-system/index.html class=menu-link>AIS 140 Vehicle Tracking System</a></li>
+
+<li id=menu-item-1551 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1551"><a
+href=../../vehicle-related-services/basic-vehicle-tracking-system/index.html class=menu-link>Basic  Vehicle Tracking System</a></li>
+
+
+<li id=menu-item-1552 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1552"><a
 href=../../vehicle-related-services/vehicle-insurance/index.html class=menu-link>Vehicle Insurance</a></li></ul></li></ul></li><li
 id=menu-item-1056 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1056"><!-- s --><li
 id=menu-item-1054 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1054"><a
@@ -306,6 +327,10 @@ class=elementor-section-wrap>
   .form-control-file{
     padding-left: 110px;
   }
+
+  input[type="radio"] {
+    margin-left:10px;
+}
  
   @media (max-width: 500px) {
   
@@ -321,44 +346,48 @@ class=elementor-section-wrap>
   }
 </style>
   <table class="mytable">
+  	<input type="hidden" name="services" value="vehicle-insurance">
+
     <tr><td><label>Your Name</label></td>
     <td>
-      <input  name="Name" type="name" id="Name" placeholder="Your Name" >
+      <input  name="Name" type="name" id="name" placeholder="Your Name" required="required" >
     </td>
     </tr>
   
   
     <tr><td><label ></label>Phone Number</label></td>
-      <td><input  name="Phone" id="Phone" placeholder="Your Phone Number" ></td>
+      <td><input  name="Phone" id="phone" placeholder="Your Phone Number" required="required" ></td>
     </tr>
 
-     <tr><td><label ></label>Address</label></td>
-      <td><input  name="address" id="address" placeholder="Your Address" ></td>
-    </tr>
+  
 
 
      <tr><td><label ></label>Email</label></td>
-      <td><input  name="Email" id="email" placeholder="Your Email-id" ></td>
+      <td><input  name="Email" id="email" placeholder="Your Email-id" required="required" ></td>
     </tr>
    
 
 
 
-
 </table>
 <table >
-    <tr><td><label >Choose type of Insurance you want </label></td>
-        <td><input type="radio" name="Comprehensive "> <label>Comprehensive </label></td>
+    <tr><td><label >Choose type of Insurance you want </label></td></tr>
+
+          
+       <tr><td><label ></label></td>
+        <td><input type="radio" name="typeofinsurance" value="Comprehensive"><label>Comprehensive</label></td>
       </tr>
+
+
       <tr><td><label > </label></td>
-        <td><input type="radio" name="Comprehensive "> <label>Zero Depth </label></td>
+        <td><input type="radio" name="typeofinsurance" value="Zero Depth"> <label>Zero Depth </label></td>
       </tr>
       
 
        <tr><td><label > </label></td>
-        <td><input type="radio" name="Third Party "> <label>Third Party </label></td>
+        <td><input type="radio" name="typeofinsurance" value="Third Party"> <label>Third Party </label></td>
       </tr>
-      </tr>
+    
       
   
   </table>
@@ -376,20 +405,33 @@ class=elementor-section-wrap>
 
 <script type="text/javascript">
 	
-function uploadFile(){
-	var reader=new FileReader();
-	var file =document.getElementById('Attested-Cop').files[0];
-	
+var $form = $('form#test-form'),
+    url = 'https://script.google.com/macros/s/AKfycbxmzDA3PW4ctcfhY7QTVLQNg9gYh_eAimB6yKlIdvrB-X6W3Fo/exec'
 
-	reader.onload=function(){
-		document.getElementById('fileContent').value=reader.result;
-		document.getElementById('filename').value=file.name;
-		document.getElementById('test-form').submit();
-	}
-	reader.readAsDataURL(file);
-	}
+$('#submit-form').on('click', function(e) {
+  e.preventDefault();
+  var jqxhr = $.ajax({
+    url: url,
+    method: "GET",
+    dataType: "json",
+    data: $form.serializeArray(),
+
+  })
+  .success(
+  alert("Thank You! Your details has been sucessfully Submitted.")
+
+  );
+  document.getElementById('name').value=""
+    document.getElementById('phone').value=""
+      document.getElementById('email').value=""
+})
 
 </script>
+
+
+
+
+
 
 
 
@@ -447,7 +489,7 @@ class="elementor-element elementor-element-f52ae1b elementor-column elementor-co
 class="elementor-column-wrap  elementor-element-populated"><div
 class=elementor-widget-wrap><div
 class="elementor-element elementor-element-4d3e893 elementor-widget elementor-widget-heading" data-id=4d3e893 data-element_type=widget data-widget_type=heading.default><div
-class=elementor-widget-container>s</div></div><div
+class=elementor-widget-container></div></div><div
 class="elementor-element elementor-element-c2165af elementor-align-center elementor-tablet-align-center elementor-mobile-align-center elementor-icon-list--layout-traditional elementor-widget elementor-widget-icon-list" data-id=c2165af data-element_type=widget data-widget_type=icon-list.default><div
 class=elementor-widget-container></div></div></div></div></div><div
 class="elementor-element elementor-element-947c663 elementor-column elementor-col-25 elementor-inner-column" data-id=947c663 data-element_type=column><div
@@ -497,13 +539,13 @@ class="elementor-element elementor-element-e8dfaa8 elementor-shape-square elemen
 class=elementor-widget-container><div
 class=elementor-social-icons-wrapper>
 <a
-class="elementor-icon elementor-social-icon elementor-social-icon-facebook-f elementor-animation-grow elementor-repeater-item-6e64e2b" href=https://www.facebook.com/rtosewa.ind target=_blank>
+class="elementor-icon elementor-social-icon elementor-social-icon-facebook-f elementor-animation-grow elementor-repeater-item-6e64e2b" href=#>
 <span
 class=elementor-screen-only>Facebook-f</span>
 <i
 class="fab fa-facebook-f"></i>		</a>
 <a
-class="elementor-icon elementor-social-icon elementor-social-icon-twitter elementor-animation-grow elementor-repeater-item-b215df1" href=https://twitter.com/MyRTO_in target=_blank>
+class="elementor-icon elementor-social-icon elementor-social-icon-twitter elementor-animation-grow elementor-repeater-item-b215df1" href=#>
 <span
 class=elementor-screen-only>Twitter</span>
 <i
@@ -545,8 +587,8 @@ class="elementor-element elementor-element-b94f1b5 elementor-widget elementor-wi
 class=elementor-widget-container><div
 class="elementor-text-editor elementor-clearfix"><p><span
 style="color: #7a7a7a;">Sitemap | <a
-style="color: #7a7a7a;" href=../../../disclaimer/index.html >Disclaimer</a> | <a
-style="color: #7a7a7a;" href=../../../policies/index.html >Privacy Policy</a></span></p></div></div></div></div></div></div></div></div></section></div></div></footer></div></div></footer></div></div></div></div></footer></div> <script>var Tawk_API=Tawk_API||{};
+style="color: #7a7a7a;" href=# >Disclaimer</a> | <a
+style="color: #7a7a7a;" href=# >Privacy Policy</a></span></p></div></div></div></div></div></div></div></div></section></div></div></footer></div></div></footer></div></div></div></div></footer></div> <script>var Tawk_API=Tawk_API||{};
 var Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
